@@ -95,3 +95,49 @@ def swap_mutation(representation, mut_prob):
             new_representation = "".join(new_representation)
     
     return new_representation
+
+
+def inversion_mutation(representation: str | list, mut_prob):
+    """
+    Applies inversion mutation to a representation.
+
+    Inversion mutation selects two random indices and reverses the 
+    subsequence between them, with a certain probability.
+
+    Parameters:
+    ----------
+    representation : str or list
+        The individual to mutate. Should represent a valid permutation.
+    mut_prob : float
+        Probability of applying the mutation (between 0 and 1).
+
+    Returns:
+    -------
+    str or list
+        A new individual with the mutated representation (if mutation occurs),
+        or a copy of the original.
+    """
+    if random.random() <= mut_prob:
+        # Select two distinct indices
+        first_idx = random.randint(0, len(representation)-1)
+        second_idx = first_idx
+        # We want to get two indexes that are at least 2 genes away
+        while abs(second_idx-first_idx) <= 1:
+            second_idx = random.randint(0, len(representation)-1)
+    
+        # Ensure first_idx < second_idx
+        if first_idx > second_idx:
+            first_idx, second_idx = second_idx, first_idx
+
+        # Reverse between first and second index
+        reversed_subsequence = list(reversed(representation[first_idx:second_idx]))
+
+        # Convert back to string if original representation is a string
+        if isinstance(representation, str):
+            reversed_subsequence = "".join(reversed_subsequence)
+
+        # Keep everything from second index (excluding it) until the end
+        new_representation = representation[:first_idx] + reversed_subsequence + representation[second_idx:]
+        return new_representation
+    else:
+        return deepcopy(representation)
