@@ -16,7 +16,7 @@ We formulate this as a **combinatorial optimization problem** and solve it using
 ## Project Structure
 
 - `Notebook_Group_AW.ipynb` – Main implementation notebook containing the code, experiments, and results.
-- `Report_Group_AW` - Written report.
+- `Report_Group_AW.pdf` - Written report.
 - `CIFO_2024_2025_Project_Statement.pdf` – Official project description and guidelines.
 - `Data/` – Input data including the relationship matrix.
 - `library/` – Custom-built library used and extended from practical sessions.
